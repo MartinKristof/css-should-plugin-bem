@@ -1,0 +1,20 @@
+{
+  "name": "bem-linter",
+  "description": "Define semantics of BEM methodics",
+  "version": "0.1.0",
+  "private": true,
+  "authors": [
+    "Martin Kristof <https://github.com/MartinKristof>"
+  ],
+  "repository": "https://github.com/MartinKristof/bem-linter/",
+  "license": "MIT",
+  "scripts": {
+    "compile": "babel src -d lib -q",
+    "test": "echo \"Error: no test found!\" && exit 1"
+  },
+  "devDependencies": {
+    "babel-cli": "^6.16.0",
+    "babel-preset-latest": "^6.16.0",
+    "css": "^2.2.1"
+  }
+}
