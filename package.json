@@ -1,5 +1,5 @@
 {
-  "name": "bem-linter",
+  "name": "css-should-plugin-bem",
   "description": "Define semantics of BEM methodics",
   "version": "0.1.0",
   "private": true,
