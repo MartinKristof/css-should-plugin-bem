@@ -1,3 +1,5 @@
+import parser from './BemParser';
+
 /**
  * Returns with selectors which are written according to BEM methodics
  */
@@ -8,15 +10,16 @@ export default class RulesResolver {
 
     getBemRules() {
         return this.rules.filter(function (rule) {
-            const selector = rule.selectors[0];
-            rule.isBem = false;
+            let selector = rule.selectors[0];
 
             if (RulesResolver.isCssClass(selector)) {
-                if (RulesResolver.isBemBlock(selector) || RulesResolver.isBemModifier(selector)) {
-                    rule.isBem = true;
+                let rules;
 
-                    return selector;
+                if (rules = parser.parse(selector)) {
+                    rule.rules = rules;
                 }
+
+                return selector;
             }
         });
     }
@@ -25,17 +28,5 @@ export default class RulesResolver {
         const pattern = /(\.\S+)/g;
 
         return className.match(pattern) ? true : false;
-    }
-
-    static isBemModifier(className) {
-        const modifierPattern = /\w+--\w+/g;
-
-        return className.match(modifierPattern) ? true : false;
-    }
-
-    static isBemBlock(className) {
-        const blockPattern = /\w+__\w+/g;
-
-        return className.match(blockPattern) ? true : false;
     }
 }

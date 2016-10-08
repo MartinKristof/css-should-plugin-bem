@@ -1,8 +1,16 @@
 import css from 'css';
+import fs from 'fs';
 import RulesResolver from './RulesResolver';
 
-const cssString = 'body {color:red;} .button {font-size:12px;} .button--primary {color:red;} .button__title {height: 30px;} .some-class-name__element-name-longer--modifier-name-longer:focus {display: none;}';
-const obj = css.parse(cssString);
+const cssFile = fs.readFileSync('../source/css.css', 'utf8', function (err, data) {
+    if (err) {
+        return console.log(err);
+    }
+
+    return data;
+});
+
+const obj = css.parse(cssFile);
 const rules = obj.stylesheet.rules;
 
 const resolver = new RulesResolver(rules);
@@ -10,3 +18,4 @@ const resolver = new RulesResolver(rules);
 resolver.getBemRules();
 
 console.log(rules);
+
