@@ -2,27 +2,44 @@ export default class BemParser {
     public static parse(className : string) : Array<string> {
         let shouldBePartOf : Array<string> = [];
 
-        if (BemParser.isBemBlock(className)) {
-            shouldBePartOf.push(BemParser.getBlockParam(className));
+        shouldBePartOf = BemParser.getParts(
+            className, shouldBePartOf, BemParser.isBemBlock(className), BemParser.getBlockParam
+        );
+
+        shouldBePartOf = BemParser.getParts(
+            className, shouldBePartOf, BemParser.isBemModifier(className), BemParser.getModifierParam
+        );
+
+        return shouldBePartOf;
+    }
+
+    private static getParts(className : string, shouldBePartOf : Array<string>, bemType : boolean, getParam : Function) : Array<string> {
+        if (!bemType) {
+            return shouldBePartOf;
         }
 
-        if (BemParser.isBemModifier(className)) {
-            shouldBePartOf.push(BemParser.getModifierParam(className));
-        }
+        const parts = className.split('.').filter(Boolean);
+        parts.forEach((part) => {
+            part = getParam(part);
+
+            if (part && shouldBePartOf.indexOf(part) === -1) {
+                shouldBePartOf.push(part);
+            }
+        });
 
         return shouldBePartOf;
     }
 
     private static getBlockParam(className : string) : string {
-        const blockPattern : RegExp= /\S+?(?=__)/g;
+        const blockPattern : RegExp = /\S+?(?=__)/g;
 
-        return className.match(blockPattern) && className.match(blockPattern)[0] + ' *';
+        return className.match(blockPattern) && '.' + className.match(blockPattern)[0] + ' *';
     }
 
     private static getModifierParam(className : string) : string {
         const modifierPattern : RegExp = /\S+?(?=--)/g;
 
-        return className.match(modifierPattern) && className.match(modifierPattern)[0];
+        return className.match(modifierPattern) && '.' + className.match(modifierPattern)[0];
     }
 
     private static isBemBlock(className : string) : boolean {

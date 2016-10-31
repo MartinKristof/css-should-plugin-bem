@@ -3,6 +3,9 @@
 
 - Define semantics of BEM methodics
 
+# v0.4.0
+- edit parser to cope more specific rules
+
 # v0.3.0
 - rewritten to TypeScript
 - add UT in AVA

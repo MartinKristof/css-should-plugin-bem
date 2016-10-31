@@ -20,7 +20,7 @@ test('should resolve rules with bem declarations', t => {
             media: '(max-width: 480px)',
             rules: [{
                 type: 'rule',
-                selectors: ['.tabs__item'],
+                selectors: ['.tabs.tabs__item'],
                 declarations: [
                     {foo: 'bar'},
                 ],
@@ -35,7 +35,7 @@ test('should resolve rules with bem declarations', t => {
         },
         {
             type: 'rule',
-            selectors: ['.tabs__item', '.tabs__item--active', '.tabs__item--active::hover'],
+            selectors: ['.tabs.tabs__item', '.tabs__item--active', '.tabs__item--active::hover'],
             declarations: [{foo: 'bar'}],
             position: {boo: 'bazz'}
         },
@@ -83,7 +83,7 @@ test('should resolve rules with bem declarations', t => {
             media: '(max-width: 480px)',
             rules: [{
                 type: 'rule',
-                selectors: ['.tabs__item'],
+                selectors: ['.tabs.tabs__item'],
                 declarations: [
                     {foo: 'bar'},
                     {type: 'declaration', axis: 'x-should', param: `match \'.tabs *\'`}
@@ -105,7 +105,7 @@ test('should resolve rules with bem declarations', t => {
         },
         {
             type: 'rule',
-            selectors: ['.tabs__item'],
+            selectors: ['.tabs.tabs__item'],
             declarations: [
                 {foo: 'bar'},
                 {type: 'declaration', axis: 'x-should', param: `match \'.tabs *\'`}

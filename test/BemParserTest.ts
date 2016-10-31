@@ -4,7 +4,7 @@ import BemParser from '../src/BemParser';
 const classProvider : Array<any> = [
     {
         description: '.button (modifier)',
-        className: '.button .button--primary',
+        className: '.button.button--primary',
         expectedSub: ['.button'],
     },
     {
@@ -31,6 +31,26 @@ const classProvider : Array<any> = [
         description: 'nothing',
         className: '',
         expectedSub: [],
+    },
+    {
+        description: 'class on div',
+        className: 'div.tabs__item',
+        expectedSub: ['.tabs *'],
+    },
+    {
+        description: 'class on anchor (modifier)',
+        className: 'a.tabs__link a.tabs__link--active',
+        expectedSub: ['.tabs *', '.tabs__link'],
+    },
+    {
+        description: 'class on anchor child (modifier)',
+        className: '.tabs__link > .tabs__link--active',
+        expectedSub: ['.tabs *', '.tabs__link'],
+    },
+    {
+        description: 'class on anchor with pseudo class',
+        className: '.tabs__link:checked',
+        expectedSub: ['.tabs *'],
     },
 ];
 

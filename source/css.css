@@ -1,4 +1,4 @@
-.tabs {
+.button.button--primary {
     border: 1px solid #1b6494;
 }
 .tabs__link--xxx,
@@ -6,7 +6,7 @@
 .headline {
     background-color: #1b6494;
 }
-.tabs__link--active::after {
+div.tabs__link--active::after {
     border-color: #1b6494 transparent transparent;
 }
 #id {
