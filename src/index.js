@@ -13,9 +13,7 @@ const cssFile = fs.readFileSync('../source/css.css', 'utf8', function (err, data
 const obj = css.parse(cssFile);
 const rules = obj.stylesheet.rules;
 
-const resolver = new RulesResolver(rules);
+const resolver  = new RulesResolver(rules);
+const result = resolver.resolve();
 
-resolver.getBemRules();
-
-console.log(rules);
-
+console.log(result);
