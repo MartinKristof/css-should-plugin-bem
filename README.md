@@ -3,6 +3,12 @@
 
 - Define semantics of BEM methodics
 
+# v0.3.0
+- rewritten to TypeScript
+- add UT in AVA
+- add support of media queries
+- add final syntax of declaration
+
 # v0.2.0
 - rename project
 - add rules for *css-should*
