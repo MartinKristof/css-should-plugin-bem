@@ -24,8 +24,8 @@ const classProvider : Array<any> = [
     },
     {
         description: '.tabs twice',
-        className: '.tabs__link--active, .tabs__link:hover',
-        expectedSub: ['.tabs *', '.tabs__link'],
+        className: '.tabs__link:hover',
+        expectedSub: ['.tabs *'],
     },
     {
         description: 'nothing',
@@ -39,18 +39,33 @@ const classProvider : Array<any> = [
     },
     {
         description: 'class on anchor (modifier)',
-        className: 'a.tabs__link a.tabs__link--active',
-        expectedSub: ['.tabs *', '.tabs__link'],
-    },
-    {
-        description: 'class on anchor child (modifier)',
-        className: '.tabs__link > .tabs__link--active',
+        className: 'a.tabs__link--active',
         expectedSub: ['.tabs *', '.tabs__link'],
     },
     {
         description: 'class on anchor with pseudo class',
         className: '.tabs__link:checked',
         expectedSub: ['.tabs *'],
+    },
+    {
+        description: 'list with modifier',
+        className: 'ul.menu--primary',
+        expectedSub: ['.menu'],
+    },
+    {
+        description: 'modifier with id parent',
+        className: 'i.item__icon.item__icon--spinning',
+        expectedSub: ['.item *', '.item__icon'],
+    },
+    {
+        description: 'modifier with data attribute',
+        className: '.item--bold',
+        expectedSub: ['.item'],
+    },
+    {
+        description: 'modifier on pseudo classes',
+        className: 'a.item--bold:active',
+        expectedSub: ['.item'],
     },
 ];
 

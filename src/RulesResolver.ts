@@ -64,6 +64,7 @@ export default class RulesResolver {
 
         rule.selectors.forEach((selector) : void => {
             if (RulesResolver.isCssClass(selector)) {
+                selector = RulesResolver.getLastPartOfCssClass(selector);
                 selectorsWithCssClass.push(selector);
             }
         });
@@ -89,5 +90,11 @@ export default class RulesResolver {
         const pattern : RegExp = /(\.\S+)/g;
 
         return selector.match(pattern);
+    }
+
+    private static getLastPartOfCssClass(selector : string) : string {
+        const parts = selector.split('.').filter(Boolean);
+
+        return '.' + parts.pop();
     }
 }

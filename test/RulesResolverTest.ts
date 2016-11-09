@@ -63,6 +63,72 @@ test('should resolve rules with bem declarations', t => {
             declarations: [{foo: 'bar'}],
             position: {boo: 'bazz'}
         },
+        {
+            type: 'rule',
+            selectors: ['.button.button--primary'],
+            declarations: [{foo: 'bar'}],
+            position: {boo: 'bazz'}
+        },
+        {
+            type: 'rule',
+            selectors: ['.button .button__link'],
+            declarations: [{foo: 'bar'}],
+            position: {boo: 'bazz'}
+        },
+        {
+            type: 'rule',
+            selectors: ['.tabs > a.tabs__link'],
+            declarations: [{foo: 'bar'}],
+            position: {boo: 'bazz'}
+        },
+        {
+            type: 'rule',
+            selectors: ['.menu--primary .item--bold'],
+            declarations: [{foo: 'bar'}],
+            position: {boo: 'bazz'}
+        },
+        {
+            type: 'rule',
+            selectors: ['ul.menu--primary'],
+            declarations: [{foo: 'bar'}],
+            position: {boo: 'bazz'}
+        },
+        {
+            type: 'rule',
+            selectors: ['body .menu--primary'],
+            declarations: [{foo: 'bar'}],
+            position: {boo: 'bazz'}
+        },
+        {
+            type: 'rule',
+            selectors: ['#page.item .item--primary .item--secondary'],
+            declarations: [{foo: 'bar'}],
+            position: {boo: 'bazz'}
+        },
+        {
+            type: 'rule',
+            selectors: ['.menu__nav--primary i.item__icon.item__icon--spinning'],
+            declarations: [{foo: 'bar'}],
+            position: {boo: 'bazz'}
+        },
+        {
+            type: 'rule',
+            selectors: ['.menu>.item--bold'],
+            declarations: [{foo: 'bar'}],
+            position: {boo: 'bazz'}
+        },
+        {
+            type: 'rule',
+            selectors: ['a[lang|=cs].item--bold'],
+            declarations: [{foo: 'bar'}],
+            position: {boo: 'bazz'}
+        },
+        {
+            type: 'rule',
+            selectors: ['*:hover .item--disabled+a.item--bold:active'],
+            declarations: [{foo: 'bar'}],
+            position: {boo: 'bazz'}
+        }
     ];
 
     const rulesResolver : RulesResolver = new RulesResolver(rules);
@@ -176,7 +242,107 @@ test('should resolve rules with bem declarations', t => {
             selectors: ['#id__bem'],
             declarations: [{foo: 'bar'}],
             position: {boo: 'bazz'}
-        }
+        },
+        {
+            type: 'rule',
+            selectors: ['.button.button--primary'],
+            declarations: [
+                {foo: 'bar'},
+                {type: 'declaration', axis: 'x-should', param: `match \'.button\'`},
+            ],
+            position: {boo: 'bazz'}
+        },
+        {
+            type: 'rule',
+            selectors: ['.button .button__link'],
+            declarations: [
+                {foo: 'bar'},
+                {type: 'declaration', axis: 'x-should', param: `match \'.button *\'`},
+            ],
+            position: {boo: 'bazz'}
+        },
+        {
+            type: 'rule',
+            selectors: ['.tabs > a.tabs__link'],
+            declarations: [
+                {foo: 'bar'},
+                {type: 'declaration', axis: 'x-should', param: `match \'.tabs *\'`},
+            ],
+            position: {boo: 'bazz'}
+        },
+        {
+            type: 'rule',
+            selectors: ['.menu--primary .item--bold'],
+            declarations: [
+                {foo: 'bar'},
+                {type: 'declaration', axis: 'x-should', param: `match \'.item\'`},
+            ],
+            position: {boo: 'bazz'}
+        },
+        {
+            type: 'rule',
+            selectors: ['ul.menu--primary'],
+            declarations: [
+                {foo: 'bar'},
+                {type: 'declaration', axis: 'x-should', param: `match \'.menu\'`},
+            ],
+            position: {boo: 'bazz'}
+        },
+        {
+            type: 'rule',
+            selectors: ['body .menu--primary'],
+            declarations: [
+                {foo: 'bar'},
+                {type: 'declaration', axis: 'x-should', param: `match \'.menu\'`},
+            ],
+            position: {boo: 'bazz'}
+        },
+        {
+            type: 'rule',
+            selectors: ['#page.item .item--primary .item--secondary'],
+            declarations: [
+                {foo: 'bar'},
+                {type: 'declaration', axis: 'x-should', param: `match \'.item\'`},
+            ],
+            position: {boo: 'bazz'}
+        },
+        {
+            type: 'rule',
+            selectors: ['.menu__nav--primary i.item__icon.item__icon--spinning'],
+            declarations: [
+                {foo: 'bar'},
+                {type: 'declaration', axis: 'x-should', param: `match \'.item *\'`},
+                {type: 'declaration', axis: 'x-should', param: `match \'.item__icon\'`},
+            ],
+            position: {boo: 'bazz'}
+        },
+        {
+            type: 'rule',
+            selectors: ['.menu>.item--bold'],
+            declarations: [
+                {foo: 'bar'},
+                {type: 'declaration', axis: 'x-should', param: `match \'.item\'`},
+            ],
+            position: {boo: 'bazz'}
+        },
+        {
+            type: 'rule',
+            selectors: ['a[lang|=cs].item--bold'],
+            declarations: [
+                {foo: 'bar'},
+                {type: 'declaration', axis: 'x-should', param: `match \'.item\'`},
+            ],
+            position: {boo: 'bazz'}
+        },
+        {
+            type: 'rule',
+            selectors: ['*:hover .item--disabled+a.item--bold:active'],
+            declarations: [
+                {foo: 'bar'},
+                {type: 'declaration', axis: 'x-should', param: `match \'.item\'`},
+            ],
+            position: {boo: 'bazz'}
+        },
     ];
 
     t.deepEqual(expectedRules, rulesResolver.resolve());

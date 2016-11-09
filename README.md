@@ -3,6 +3,12 @@
 
 - Define semantics of BEM methodics
 
+# v0.5.0
+- remove CSS file
+- remove index
+- add *PluginBem* to export plugin
+- fix UT and algorithm
+
 # v0.4.0
 - edit parser to cope more specific rules
 
