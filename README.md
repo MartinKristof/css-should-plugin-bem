@@ -3,8 +3,12 @@
 
 - Define semantics of BEM methodics
 
+# v0.6.0
+- *PluginBem* renamed to *index* with correct public API
+- fix *BemParserTest* description of test cases
+
 # v0.5.0
-- remove CSS file
+- remove CSS fileg 
 - remove index
 - add *PluginBem* to export plugin
 - fix UT and algorithm

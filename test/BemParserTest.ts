@@ -53,12 +53,12 @@ const classProvider : Array<any> = [
         expectedSub: ['.menu'],
     },
     {
-        description: 'modifier with id parent',
+        description: 'modifier with entire element',
         className: 'i.item__icon.item__icon--spinning',
         expectedSub: ['.item *', '.item__icon'],
     },
     {
-        description: 'modifier with data attribute',
+        description: 'modifier without parent element',
         className: '.item--bold',
         expectedSub: ['.item'],
     },
