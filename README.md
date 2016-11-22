@@ -3,6 +3,9 @@
 
 - Define semantics of BEM methodics
 
+# v0.7.0
+- Add main into package.json
+
 # v0.6.0
 - *PluginBem* renamed to *index* with correct public API
 - fix *BemParserTest* description of test cases

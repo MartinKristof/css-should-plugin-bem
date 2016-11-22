@@ -6,6 +6,7 @@
   "authors": [
     "Martin Kristof <https://github.com/MartinKristof>"
   ],
+  "main": "src/index.js",
   "repository": "https://github.com/MartinKristof/bem-linter/",
   "license": "MIT",
   "scripts": {
