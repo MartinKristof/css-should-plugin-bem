@@ -3,6 +3,9 @@
 
 - Define semantics of BEM methodics
 
+# v0.8.0
+- Make plugin public
+
 # v0.7.0
 - Add main into package.json
 
