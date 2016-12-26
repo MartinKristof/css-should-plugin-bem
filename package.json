@@ -17,8 +17,7 @@
   "devDependencies": {
     "ava": "^0.16.0",
     "babel-cli": "^6.16.0",
-    "babel-preset-latest": "^6.16.0",
-    "css": "^2.2.1"
+    "babel-preset-latest": "^6.16.0"
   },
   "ava": {
     "files": [
