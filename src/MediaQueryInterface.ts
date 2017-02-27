@@ -1,7 +1,5 @@
-import {RuleInterface} from './RuleInterace';
+import {Media} from 'css';
 
-export interface MediaQueryInterface {
+export interface MediaQueryInterface extends Media {
     type : string;
-    media: string;
-    rules : Array<RuleInterface>;
 }

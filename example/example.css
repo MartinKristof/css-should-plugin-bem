@@ -1,0 +1,25 @@
+.tabs {
+  border: 1px solid #1b6494;
+}
+
+.tabs__link--xxx,
+.tabs__link--itemize,
+.headline {
+  background-color: #1b6494;
+}
+
+.tabs__link--active::after {
+  border-color: #1b6494 transparent transparent;
+}
+
+#id {
+  border-color: #1b6494 transparent transparent;
+}
+
+@media (max-width: 480px) {
+  .tabs__link--xxx,
+  .tabs__link--active,
+  #id2 {
+    color: red;
+  }
+}

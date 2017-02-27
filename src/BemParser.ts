@@ -18,7 +18,8 @@ export default class BemParser {
             return shouldBePartOf;
         }
 
-        const parts = className.split('.').filter(Boolean);
+        const parts : Array<string> = className.split('.').filter(Boolean);
+
         parts.forEach((part) => {
             part = getParam(part);
 

@@ -1,20 +1,30 @@
 # css-should-plugin-bem
-[in development]
 
-- Define semantics of BEM methodics
+Define semantics of Block element modifier methodics (http://getbem.com/naming/). 
+This middleware adds special `x-should` properties into given CSS file.
+Package `css-should` (https://github.com/robinpokorny/css-should) could works with them and resolves whether CSS classes are written correctly according to BEM.
+Under MIT Licence.
+
+##Installation
+Package is available on NPM and you could install like this:
+`npm instal css-should-plugin-bem`
+
+# v1.0.0
+- add example (output on console and into file)
+- remove *RuleInterface* (replaced with Rule from css package)
 
 # v0.8.0
-- Make plugin public
+- make plugin as public
 
 # v0.7.0
-- Add main into package.json
+- add main path of package into package.json
 
 # v0.6.0
 - *PluginBem* renamed to *index* with correct public API
 - fix *BemParserTest* description of test cases
 
 # v0.5.0
-- remove CSS fileg 
+- remove CSS files 
 - remove index
 - add *PluginBem* to export plugin
 - fix UT and algorithm

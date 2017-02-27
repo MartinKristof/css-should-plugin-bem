@@ -10,6 +10,7 @@
   "license": "MIT",
   "scripts": {
     "compile": "npm run tsc && npm run build",
+    "example": "npm run compile && babel-node ./example/index.js",
     "build": "babel src -d lib -q",
     "tsc": "tsc -p ./",
     "test": "ava -v"
@@ -17,7 +18,10 @@
   "devDependencies": {
     "ava": "^0.16.0",
     "babel-cli": "^6.16.0",
-    "babel-preset-latest": "^6.16.0"
+    "babel-preset-latest": "^6.16.0",
+    "chalk": "^1.1.3",
+    "css": "^2.2.1",
+    "diff": "^3.2.0"
   },
   "ava": {
     "files": [
@@ -32,6 +36,10 @@
     ]
   },
   "dependencies": {
+    "@types/chalk": "^0.4.31",
+    "@types/css": "0.0.30",
+    "@types/diff": "0.0.31",
+    "@types/node": "^7.0.5",
     "babel-register": "^6.16.3",
     "typescript": "^2.0.6"
   }

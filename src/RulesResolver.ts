@@ -1,13 +1,13 @@
 import BemParser from './BemParser';
-import {RuleInterface} from './RuleInterace';
 import {MediaQueryInterface} from './MediaQueryInterface';
+import {Stylesheet, Rule} from 'css';
 
 export default class RulesResolver {
-    constructor(private rules : Array<RuleInterface|MediaQueryInterface>) {
+    constructor(private rules : Array<Stylesheet>) {
     }
 
-    public resolve() : Array<RuleInterface|MediaQueryInterface> {
-        let result : Array<RuleInterface|MediaQueryInterface> = [];
+    public resolve() : Array<Rule|MediaQueryInterface> {
+        let result : Array<Rule|MediaQueryInterface> = [];
 
         this.rules.forEach((rule : any) : void => {
             if (RulesResolver.isNotMediaQuery(rule) && RulesResolver.isRule(rule)) {
@@ -32,12 +32,12 @@ export default class RulesResolver {
         return result;
     }
 
-    private flattenRules(rules : Array<RuleInterface>) : Array<RuleInterface> {
-        let results : Array<RuleInterface> = [];
+    private flattenRules(rules : Array<Rule>) : Array<Rule> {
+        let results : Array<Rule> = [];
 
         rules.forEach((rule) : void => {
             rule.selectors.forEach((selector) : void => {
-                const newRule : RuleInterface = {
+                const newRule : Rule = {
                     type: rule.type,
                     selectors: [selector],
                     declarations: rule.declarations,
@@ -51,15 +51,15 @@ export default class RulesResolver {
         return results;
     }
 
-    private static isNotMediaQuery(rule : MediaQueryInterface|RuleInterface) : boolean {
+    private static isNotMediaQuery(rule : MediaQueryInterface|Rule) : boolean {
         return rule.type != 'media';
     }
 
-    private static isRule(rule : MediaQueryInterface|RuleInterface) : boolean {
+    private static isRule(rule : MediaQueryInterface|Rule) : boolean {
         return rule.type == 'rule';
     }
 
-    private getRuleWithBemDeclarations(rule : RuleInterface) : RuleInterface {
+    private getRuleWithBemDeclarations(rule : Rule) : Rule {
         const selectorsWithCssClass : Array<string> = [];
 
         rule.selectors.forEach((selector) : void => {
@@ -80,7 +80,7 @@ export default class RulesResolver {
         }
 
         rule.declarations = rule.declarations.concat(params.map((param) : Object => {
-            return {type: 'declaration', axis: 'x-should', param: `match '${param}'`};
+            return {type: 'declaration', property: 'x-should', value: `match '${param}'`};
         }));
 
         return rule;
@@ -93,7 +93,7 @@ export default class RulesResolver {
     }
 
     private static getLastPartOfCssClass(selector : string) : string {
-        const parts = selector.split('.').filter(Boolean);
+        const parts : Array<string> = selector.split('.').filter(Boolean);
 
         return '.' + parts.pop();
     }

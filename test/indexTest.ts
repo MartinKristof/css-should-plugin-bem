@@ -1,9 +1,10 @@
 import test from 'ava';
 import {preprocess, name} from '../src/index';
+import {Stylesheet} from 'css';
 
 test('should get preproccess', t => {
-    let ctx : any = {
-        css: {
+    let ctx : Stylesheet = {
+        stylesheet: {
             rules: [
                 {
                     type: 'media',

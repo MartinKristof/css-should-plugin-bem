@@ -9,7 +9,8 @@
   },
   "include": [
     "src/**/*",
-    "test/**/*"
+    "test/**/*",
+    "example/index.ts"
   ],
   "exclude": [
     "node_modules",

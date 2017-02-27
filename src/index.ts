@@ -1,7 +1,8 @@
 import RulesResolver from './RulesResolver';
+import {Stylesheet} from 'css';
 
-export const preprocess : Function = (ctx : any, next : Function) => {
-    ctx.css.rules = (new RulesResolver(ctx.css.rules)).resolve();
+export const preprocess : Function = (ctx : Stylesheet, next : Function) => {
+    ctx.stylesheet.rules = (new RulesResolver(ctx.stylesheet.rules)).resolve();
 
     return next();
 };

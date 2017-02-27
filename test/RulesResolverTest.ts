@@ -1,10 +1,10 @@
 import test from 'ava';
 import RulesResolver from '../src/RulesResolver';
-import {RuleInterface} from '../src/RuleInterace';
 import {MediaQueryInterface} from '../src/MediaQueryInterface';
+import {Rule} from 'css';
 
 test('should resolve rules with bem declarations', t => {
-    const rules : Array<RuleInterface | MediaQueryInterface> = [
+    const rules : Array<Rule | MediaQueryInterface> = [
         {
             type: 'media',
             media: '(max-width: 480px)',
@@ -133,7 +133,7 @@ test('should resolve rules with bem declarations', t => {
 
     const rulesResolver : RulesResolver = new RulesResolver(rules);
 
-    const expectedRules : Array<RuleInterface | MediaQueryInterface> = [
+    const expectedRules : Array<Rule | MediaQueryInterface> = [
         {
             type: 'media',
             media: '(max-width: 480px)',
@@ -152,7 +152,7 @@ test('should resolve rules with bem declarations', t => {
                 selectors: ['.tabs.tabs__item'],
                 declarations: [
                     {foo: 'bar'},
-                    {type: 'declaration', axis: 'x-should', param: `match \'.tabs *\'`}
+                    {type: 'declaration', property: 'x-should', value: `match \'.tabs *\'`}
                 ],
                 position: {boo: 'bazz'}
             }]
@@ -174,7 +174,7 @@ test('should resolve rules with bem declarations', t => {
             selectors: ['.tabs.tabs__item'],
             declarations: [
                 {foo: 'bar'},
-                {type: 'declaration', axis: 'x-should', param: `match \'.tabs *\'`}
+                {type: 'declaration', property: 'x-should', value: `match \'.tabs *\'`}
             ],
             position: {boo: 'bazz'}
         },
@@ -183,8 +183,8 @@ test('should resolve rules with bem declarations', t => {
             selectors: ['.tabs__item--active'],
             declarations: [
                 {foo: 'bar'},
-                {type: 'declaration', axis: 'x-should', param: `match \'.tabs *\'`},
-                {type: 'declaration', axis: 'x-should', param: `match \'.tabs__item\'`}
+                {type: 'declaration', property: 'x-should', value: `match \'.tabs *\'`},
+                {type: 'declaration', property: 'x-should', value: `match \'.tabs__item\'`}
             ],
             position: {boo: 'bazz'}
         },
@@ -193,8 +193,8 @@ test('should resolve rules with bem declarations', t => {
             selectors: ['.tabs__item--active::hover'],
             declarations: [
                 {foo: 'bar'},
-                {type: 'declaration', axis: 'x-should', param: `match \'.tabs *\'`},
-                {type: 'declaration', axis: 'x-should', param: `match \'.tabs__item\'`}
+                {type: 'declaration', property: 'x-should', value: `match \'.tabs *\'`},
+                {type: 'declaration', property: 'x-should', value: `match \'.tabs__item\'`}
             ],
             position: {boo: 'bazz'}
         },
@@ -207,7 +207,7 @@ test('should resolve rules with bem declarations', t => {
                     selectors: ['.tabs__item'],
                     declarations: [
                         {foo: 'bar'},
-                        {type: 'declaration', axis: 'x-should', param: `match \'.tabs *\'`}
+                        {type: 'declaration', property: 'x-should', value: `match \'.tabs *\'`}
                     ],
                     position: {boo: 'bazz'}
                 },
@@ -216,8 +216,8 @@ test('should resolve rules with bem declarations', t => {
                     selectors: ['.tabs__item--active'],
                     declarations: [
                         {foo: 'bar'},
-                        {type: 'declaration', axis: 'x-should', param: `match \'.tabs *\'`},
-                        {type: 'declaration', axis: 'x-should', param: `match \'.tabs__item\'`}
+                        {type: 'declaration', property: 'x-should', value: `match \'.tabs *\'`},
+                        {type: 'declaration', property: 'x-should', value: `match \'.tabs__item\'`}
                     ],
                     position: {boo: 'bazz'}
                 },
@@ -248,7 +248,7 @@ test('should resolve rules with bem declarations', t => {
             selectors: ['.button.button--primary'],
             declarations: [
                 {foo: 'bar'},
-                {type: 'declaration', axis: 'x-should', param: `match \'.button\'`},
+                {type: 'declaration', property: 'x-should', value: `match \'.button\'`},
             ],
             position: {boo: 'bazz'}
         },
@@ -257,7 +257,7 @@ test('should resolve rules with bem declarations', t => {
             selectors: ['.button .button__link'],
             declarations: [
                 {foo: 'bar'},
-                {type: 'declaration', axis: 'x-should', param: `match \'.button *\'`},
+                {type: 'declaration', property: 'x-should', value: `match \'.button *\'`},
             ],
             position: {boo: 'bazz'}
         },
@@ -266,7 +266,7 @@ test('should resolve rules with bem declarations', t => {
             selectors: ['.tabs > a.tabs__link'],
             declarations: [
                 {foo: 'bar'},
-                {type: 'declaration', axis: 'x-should', param: `match \'.tabs *\'`},
+                {type: 'declaration', property: 'x-should', value: `match \'.tabs *\'`},
             ],
             position: {boo: 'bazz'}
         },
@@ -275,7 +275,7 @@ test('should resolve rules with bem declarations', t => {
             selectors: ['.menu--primary .item--bold'],
             declarations: [
                 {foo: 'bar'},
-                {type: 'declaration', axis: 'x-should', param: `match \'.item\'`},
+                {type: 'declaration', property: 'x-should', value: `match \'.item\'`},
             ],
             position: {boo: 'bazz'}
         },
@@ -284,7 +284,7 @@ test('should resolve rules with bem declarations', t => {
             selectors: ['ul.menu--primary'],
             declarations: [
                 {foo: 'bar'},
-                {type: 'declaration', axis: 'x-should', param: `match \'.menu\'`},
+                {type: 'declaration', property: 'x-should', value: `match \'.menu\'`},
             ],
             position: {boo: 'bazz'}
         },
@@ -293,7 +293,7 @@ test('should resolve rules with bem declarations', t => {
             selectors: ['body .menu--primary'],
             declarations: [
                 {foo: 'bar'},
-                {type: 'declaration', axis: 'x-should', param: `match \'.menu\'`},
+                {type: 'declaration', property: 'x-should', value: `match \'.menu\'`},
             ],
             position: {boo: 'bazz'}
         },
@@ -302,7 +302,7 @@ test('should resolve rules with bem declarations', t => {
             selectors: ['#page.item .item--primary .item--secondary'],
             declarations: [
                 {foo: 'bar'},
-                {type: 'declaration', axis: 'x-should', param: `match \'.item\'`},
+                {type: 'declaration', property: 'x-should', value: `match \'.item\'`},
             ],
             position: {boo: 'bazz'}
         },
@@ -311,8 +311,8 @@ test('should resolve rules with bem declarations', t => {
             selectors: ['.menu__nav--primary i.item__icon.item__icon--spinning'],
             declarations: [
                 {foo: 'bar'},
-                {type: 'declaration', axis: 'x-should', param: `match \'.item *\'`},
-                {type: 'declaration', axis: 'x-should', param: `match \'.item__icon\'`},
+                {type: 'declaration', property: 'x-should', value: `match \'.item *\'`},
+                {type: 'declaration', property: 'x-should', value: `match \'.item__icon\'`},
             ],
             position: {boo: 'bazz'}
         },
@@ -321,7 +321,7 @@ test('should resolve rules with bem declarations', t => {
             selectors: ['.menu>.item--bold'],
             declarations: [
                 {foo: 'bar'},
-                {type: 'declaration', axis: 'x-should', param: `match \'.item\'`},
+                {type: 'declaration', property: 'x-should', value: `match \'.item\'`},
             ],
             position: {boo: 'bazz'}
         },
@@ -330,7 +330,7 @@ test('should resolve rules with bem declarations', t => {
             selectors: ['a[lang|=cs].item--bold'],
             declarations: [
                 {foo: 'bar'},
-                {type: 'declaration', axis: 'x-should', param: `match \'.item\'`},
+                {type: 'declaration', property: 'x-should', value: `match \'.item\'`},
             ],
             position: {boo: 'bazz'}
         },
@@ -339,7 +339,7 @@ test('should resolve rules with bem declarations', t => {
             selectors: ['*:hover .item--disabled+a.item--bold:active'],
             declarations: [
                 {foo: 'bar'},
-                {type: 'declaration', axis: 'x-should', param: `match \'.item\'`},
+                {type: 'declaration', property: 'x-should', value: `match \'.item\'`},
             ],
             position: {boo: 'bazz'}
         },
