@@ -2,7 +2,7 @@ import * as path from 'path';
 import {Rule, Media} from 'css';
 import * as chalk from 'chalk';
 import IDiffResult = JsDiff.IDiffResult;
-import {XshouldDeclarationInterface} from '../src/RulesResolver';
+import {XshouldDeclarationInterface} from '../../src/RulesResolver';
 import parseCss from './parseCss';
 
 export default function lint(fileName : string) {
@@ -12,19 +12,17 @@ export default function lint(fileName : string) {
     let selectors : Array<string> = [];
     let foundClasses : Array<string> = [];
 
-    css.stylesheet.rules.forEach((rule : Rule) => {
+    css.stylesheet.rules.forEach((rule : Rule & Media) => {
         detectMissingClasses(rule, selectors, foundClasses);
 
         if (rule.type === 'media') {
-            const mediaRules : Media = rule;
-
-            mediaRules.rules.forEach((rule) => {
+            rule.rules.forEach((rule) => {
                 detectMissingClasses(rule, selectors, foundClasses);
             });
         }
     });
 
-    const missingClasses : Array<string> = foundClasses.filter((i) => {
+    const missingClasses : Array<string> = foundClasses.filter((i : string) => {
         return selectors.indexOf(i) < 0;
     });
 

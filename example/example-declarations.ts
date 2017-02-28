@@ -1,3 +1,3 @@
-import getBemDeclarations from './bem-declarations';
+import getBemDeclarations from './src/bem-declarations';
 
-getBemDeclarations('./example.css');
+getBemDeclarations('../cssFiles/example.css');

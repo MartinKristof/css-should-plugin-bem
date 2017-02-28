@@ -1,7 +1,7 @@
 {
   "name": "css-should-plugin-bem",
   "description": "Define semantics of BEM methodics",
-  "version": "1.1.1",
+  "version": "1.2.0",
   "authors": [
     "Martin Kristof <https://github.com/MartinKristof>"
   ],

@@ -1,3 +1,3 @@
-import lint from './lint';
+import lint from './src/lint';
 
-lint('./example-with-errors.css');
+lint('../cssFiles/example-with-errors.css');

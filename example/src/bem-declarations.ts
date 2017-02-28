@@ -19,7 +19,7 @@ export default function getBemDeclarations(fileName : string) {
 
     console.log();
 
-    const newFilePath : string = path.join(__dirname, './example-out.css');
+    const newFilePath : string = path.join(__dirname, '../output/example-out.css');
 
     console.log('css-should declarations will be written into file ' + newFilePath);
     fs.writeFileSync(newFilePath, newCssFile, ENCODING);
