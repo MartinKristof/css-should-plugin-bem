@@ -9,6 +9,16 @@ Under MIT Licence.
 Package is available on NPM and you could install like this:
 `npm instal css-should-plugin-bem`
 
+#Usage
+run `npm run lint` to lint example CSS file
+run `npm run lint-with-error` to lint example CSS file to demonstrate bad named classes according to BEM
+run `npm run declarations` to get BEM declarations for *CSS-should*
+run `npm run declarations-with-errors` to get BEM declarations with bad named classes according to BEM for *CSS-should*
+
+# v1.1.0
+- add ability to add BEM declarations into given CSS file
+- add linting of CSS classes according to BEM
+
 # v1.0.0
 - add example (output on console and into file)
 - remove *RuleInterface* (replaced with Rule from css package)

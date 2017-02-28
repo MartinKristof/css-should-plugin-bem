@@ -1,5 +1,50 @@
+@media (max-width: 480px) {
+  .tabs__link--xxx {
+    color: red;
+    x-should: match '.tabs *';
+    x-should: match '.tabs__link';
+  }
+
+  .tabs__link--active {
+    color: red;
+    x-should: match '.tabs *';
+    x-should: match '.tabs__link';
+  }
+
+  .tabs__header--active {
+    color: red;
+    x-should: match '.tabs *';
+    x-should: match '.tabs__header';
+  }
+
+  #id2 {
+    color: red;
+  }
+
+  .tabs__item {
+    color: blue;
+    x-should: match '.tabs *';
+  }
+}
+
+.tabs__link {
+  color: black;
+  x-should: match '.tabs *';
+}
+
 .tabs {
   border: 1px solid #1b6494;
+}
+
+.tabs__item--abc {
+  background-color: red;
+  x-should: match '.tabs *';
+  x-should: match '.tabs__item';
+}
+
+.tabs__header {
+  display: block;
+  x-should: match '.tabs *';
 }
 
 .tabs__link--xxx {
@@ -26,22 +71,4 @@
 
 #id {
   border-color: #1b6494 transparent transparent;
-}
-
-@media (max-width: 480px) {
-  .tabs__link--xxx {
-    color: red;
-    x-should: match '.tabs *';
-    x-should: match '.tabs__link';
-  }
-
-  .tabs__link--active {
-    color: red;
-    x-should: match '.tabs *';
-    x-should: match '.tabs__link';
-  }
-
-  #id2 {
-    color: red;
-  }
 }

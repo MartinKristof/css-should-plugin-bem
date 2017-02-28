@@ -2,6 +2,12 @@ import BemParser from './BemParser';
 import {MediaQueryInterface} from './MediaQueryInterface';
 import {Stylesheet, Rule} from 'css';
 
+export interface XshouldDeclarationInterface {
+    type: string;
+    property: string;
+    value: string;
+}
+
 export default class RulesResolver {
     constructor(private rules : Array<Stylesheet>) {
     }
@@ -79,7 +85,7 @@ export default class RulesResolver {
             return rule;
         }
 
-        rule.declarations = rule.declarations.concat(params.map((param) : Object => {
+        rule.declarations = rule.declarations.concat(params.map((param) : XshouldDeclarationInterface => {
             return {type: 'declaration', property: 'x-should', value: `match '${param}'`};
         }));
 
