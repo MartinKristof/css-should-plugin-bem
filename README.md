@@ -6,7 +6,7 @@ Package `css-should` (https://github.com/robinpokorny/css-should) could works wi
 Under MIT Licence.
 
 ##Installation
-Package is available on NPM and you could install like this:
+Package is available on NPM (https://www.npmjs.com/package/css-should-plugin-bem) and you could install like this:
 `npm instal css-should-plugin-bem`
 
 #Example
