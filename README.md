@@ -1,7 +1,7 @@
 # css-should-plugin-bem
 
-Define semantics of Block element modifier methodics (http://getbem.com/naming/). 
-This middleware adds special `x-should` properties into given CSS file.
+Define semantics of Block element modifier methodics (http://getbem.com/naming/).<br>
+This middleware adds special `x-should` properties into given CSS file.<br>
 Package `css-should` (https://github.com/robinpokorny/css-should) could works with them and resolves whether CSS classes are written correctly according to BEM.
 Under MIT Licence.
 
@@ -10,10 +10,10 @@ Package is available on NPM and you could install like this:
 `npm instal css-should-plugin-bem`
 
 #Usage
-run `npm run lint` to lint example CSS file
-run `npm run lint-with-error` to lint example CSS file to demonstrate bad named classes according to BEM
-run `npm run declarations` to get BEM declarations for *CSS-should*
-run `npm run declarations-with-errors` to get BEM declarations with bad named classes according to BEM for *CSS-should*
+run `npm run lint` to lint example CSS file<br>
+run `npm run lint-with-error` to lint example CSS file to demonstrate bad named classes according to BEM<br>
+run `npm run declarations` to get BEM declarations for *CSS-should*<br>
+run `npm run declarations-with-errors` to get BEM declarations with bad named classes according to BEM for *CSS-should*<br>
 
 # v1.1.0
 - add ability to add BEM declarations into given CSS file
