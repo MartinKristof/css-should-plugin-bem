@@ -15,9 +15,12 @@ run `npm run lint-with-error` to lint example CSS file to demonstrate bad named 
 run `npm run declarations` to get BEM declarations for *CSS-should*, show them in CLI and save output into file<br>
 run `npm run declarations-with-errors` to get BEM declarations with bad named classes according to BEM for *CSS-should*, show them in CLI and save output into file<br>
 
-# v1.2.1
+# v1.2.2
 - fix `test` task
 - define return type of *preprocess* function
+
+# v1.2.1
+- edit *README*
 
 # v1.2.0
 - edit dir structure on *example* dir
