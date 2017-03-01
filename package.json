@@ -16,7 +16,7 @@
     "declarations-with-errors": "npm run compile && babel-node ./example/example-declarations-with-errors.js",
     "build": "babel src -d lib -q",
     "tsc": "tsc -p ./",
-    "test": "ava -v"
+    "test": "npm run tsc & ava -v"
   },
   "devDependencies": {
     "ava": "^0.16.0",
