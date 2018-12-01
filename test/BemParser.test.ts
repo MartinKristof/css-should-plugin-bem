@@ -1,4 +1,4 @@
-import test from 'ava';
+import test from 'ava-ts';
 import BemParser from '../src/BemParser';
 
 const classProvider : Array<any> = [
@@ -73,6 +73,6 @@ classProvider.forEach(provider => {
     test('should be part of ' + provider.description, t => {
         const result : Array<string>  = BemParser.parse(provider.className);
 
-        t.deepEqual(provider.expectedSub, result);
+        t.deepEqual(result, provider.expectedSub);
     })
 });

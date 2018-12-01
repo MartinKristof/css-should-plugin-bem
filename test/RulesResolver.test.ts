@@ -1,4 +1,4 @@
-import test from 'ava';
+import test from 'ava-ts';
 import RulesResolver from '../src/RulesResolver';
 import {MediaQueryInterface} from '../src/MediaQueryInterface';
 import {Rule} from 'css';
@@ -345,5 +345,5 @@ test('should resolve rules with bem declarations', t => {
         },
     ];
 
-    t.deepEqual(expectedRules, rulesResolver.resolve());
+    t.deepEqual(rulesResolver.resolve(), expectedRules);
 });
