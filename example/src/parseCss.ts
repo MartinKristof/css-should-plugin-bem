@@ -1,7 +1,7 @@
 import * as fs from 'fs';
 import * as path from 'path';
 import { parse, stringify, Stylesheet } from 'css';
-import { preprocess } from '../../src/index';
+import { preprocess } from '../../src';
 
 export const ENCODING: string = 'utf8';
 
