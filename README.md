@@ -7,62 +7,28 @@ Under MIT Licence.
 
 ##Installation
 Package is available on NPM (https://www.npmjs.com/package/css-should-plugin-bem) and you could install like this:
-`npm instal css-should-plugin-bem`
+`npm instal css-should-plugin-bem` or `yarn add css-should-plugin-bem`
 
-#Example
-run `npm run lint` to lint example CSS file and show results in CLI<br>
-run `npm run lint-with-error` to lint example CSS file to demonstrate bad named classes according to BEM and show results in CLI<br>
-run `npm run declarations` to get BEM declarations for *CSS-should*, show them in CLI and save output into file<br>
-run `npm run declarations-with-errors` to get BEM declarations with bad named classes according to BEM for *CSS-should*, show them in CLI and save output into file<br>
+### Scripts
 
-# v1.2.2
-- fix `test` task
-- define return type of *preprocess* function
+* `yarn` or `npm install` - install dependencies
 
-# v1.2.1
-- edit *README*
+You can use both `yarn` or `npm run` to control application flow.
 
-# v1.2.0
-- edit dir structure on *example* dir
-- edit types
+* `compile` - Starts Next.js application
+* `lint` - Lint example CSS file and show results in CLI.
+* `lint-with-error` - Lint example CSS file to demonstrate bad named classes according to BEM and show results in CLI.
+* `declarations` - Get BEM declarations for *CSS-should*, show them in CLI and save output into file.
+* `declarations-with-errors` - get BEM declarations with bad named classes according to BEM for *CSS-should*, show them in CLI and save output into file.
+* `build` - Build dist file with Webpack.
+* `build:lib` - Build lib files.
+* `test` - Runs AVA tests.
+* `tsc` - Runs typescript compiler.
+* `prettier:check` - Check pretty of code.
+* `prettier:fix` - Runs prettyfying of code.
 
-# v1.1.0
-- add ability to add BEM declarations into given CSS file
-- add linting of CSS classes according to BEM
-
-# v1.0.0
-- add example (output on console and into file)
-- remove *RuleInterface* (replaced with Rule from css package)
-
-# v0.8.0
-- make plugin as public
-
-# v0.7.0
-- add main path of package into package.json
-
-# v0.6.0
-- *PluginBem* renamed to *index* with correct public API
-- fix *BemParserTest* description of test cases
-
-# v0.5.0
-- remove CSS files 
-- remove index
-- add *PluginBem* to export plugin
-- fix UT and algorithm
-
-# v0.4.0
-- edit parser to cope more specific rules
-
-# v0.3.0
-- rewritten to TypeScript
-- add UT in AVA
-- add support of media queries
-- add final syntax of declaration
-
-# v0.2.0
-- rename project
-- add rules for *css-should*
-- reading css from file is now implemented
-
-# v0.1.0
-- CSS Tree is now decorated with flag, whether is element with any CSS class written according to BEM methodics
+#Examples
+* run `npm run lint` to lint example CSS file and show results in CLI<br>
+* run `npm run lint-with-error` to lint example CSS file to demonstrate bad named classes according to BEM and show results in CLI<br>
+* run `npm run declarations` to get BEM declarations for *CSS-should*, show them in CLI and save output into file<br>
+* run `npm run declarations-with-errors` to get BEM declarations with bad named classes according to BEM for *CSS-should*, show them in CLI and save output into file<br>

@@ -1,4 +1,10 @@
 /lib
 /node_modules
+/src/**/*.js
+/src/**/*.js.map
+/test/**/*.js
+/test/**/*.js.map
+/example/**/*.js
+/example/**/*.js.map
 /.idea
 /.DS_Store
