@@ -20,7 +20,7 @@
     "build": "webpack",
     "build:lib": "babel src -d lib -q",
     "tsc": "tsc -p ./",
-    "test": "ava-ts",
+    "test": "npm run tsc && ava-ts",
     "prettier:fix": "prettier --write 'src/**/*.ts' 'test/**/*.ts' 'example/**/*.ts'",
     "prettier:check": "prettier --list-different 'src/**/*.js' 'tests/**/*.js' 'example/**/*.ts'"
   },

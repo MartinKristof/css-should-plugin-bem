@@ -1,5 +1,5 @@
 import test from 'ava-ts';
-import { preprocess, process, proccessLint, name } from '../src';
+import { preprocess, process, processLint, name } from '../src';
 
 let ctx = {
   stylesheet: {
@@ -86,7 +86,7 @@ test('should get process', (t) => {
 });
 
 test('should get processLint', (t) => {
-  t.deepEqual(proccessLint(ctx), ['.button']);
+  t.deepEqual(processLint(ctx), ['.button']);
 });
 
 test('should get name', (t) => {

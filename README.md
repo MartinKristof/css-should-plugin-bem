@@ -5,11 +5,11 @@ This middleware adds special `x-should` properties into given CSS file.<br>
 Package `css-should` (https://github.com/robinpokorny/css-should) could works with them and resolves whether CSS classes are written correctly according to BEM.
 Under MIT Licence.
 
-##Installation
+## Installation
 Package is available on NPM (https://www.npmjs.com/package/css-should-plugin-bem) and you could install like this:
 `npm instal css-should-plugin-bem` or `yarn add css-should-plugin-bem`
 
-### Scripts
+## Scripts
 
 * `yarn` or `npm install` - install dependencies
 
@@ -27,7 +27,7 @@ You can use both `yarn` or `npm run` to control application flow.
 * `prettier:check` - Check pretty of code.
 * `prettier:fix` - Runs prettyfying of code.
 
-#Examples
+## Examples
 * run `npm run lint` to lint example CSS file and show results in CLI<br>
 * run `npm run lint-with-error` to lint example CSS file to demonstrate bad named classes according to BEM and show results in CLI<br>
 * run `npm run declarations` to get BEM declarations for *CSS-should*, show them in CLI and save output into file<br>

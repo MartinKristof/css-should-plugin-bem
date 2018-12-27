@@ -13,7 +13,7 @@ export const process = (ctx: Stylesheet): Array<Rule | MediaQueryInterface> => {
   return new RulesResolver(ctx.stylesheet.rules).resolve();
 };
 
-export const proccessLint = (ctx: Stylesheet): Array<string> => {
+export const processLint = (ctx: Stylesheet): Array<string> => {
   ctx.stylesheet.rules = process(ctx);
 
   return lint(ctx);
