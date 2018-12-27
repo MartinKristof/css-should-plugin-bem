@@ -1,57 +1,68 @@
 export default class BemParser {
-    public static parse(className : string) : Array<string> {
-        let shouldBePartOf : Array<string> = [];
+  public static parse(className: string): Array<string> {
+    let shouldBePartOf: Array<string> = [];
 
-        shouldBePartOf = BemParser.getParts(
-            className, shouldBePartOf, BemParser.isBemBlock(className), BemParser.getBlockParam
-        );
+    shouldBePartOf = BemParser.getParts(
+      className,
+      shouldBePartOf,
+      BemParser.isBemBlock(className),
+      BemParser.getBlockParam,
+    );
 
-        shouldBePartOf = BemParser.getParts(
-            className, shouldBePartOf, BemParser.isBemModifier(className), BemParser.getModifierParam
-        );
+    shouldBePartOf = BemParser.getParts(
+      className,
+      shouldBePartOf,
+      BemParser.isBemModifier(className),
+      BemParser.getModifierParam,
+    );
 
-        return shouldBePartOf;
+    return shouldBePartOf;
+  }
+
+  private static getParts(
+    className: string,
+    shouldBePartOf: Array<string>,
+    bemType: boolean,
+    getParam: Function,
+  ): Array<string> {
+    if (!bemType) {
+      return shouldBePartOf;
     }
 
-    private static getParts(className : string, shouldBePartOf : Array<string>, bemType : boolean, getParam : Function) : Array<string> {
-        if (!bemType) {
-            return shouldBePartOf;
-        }
+    const parts: Array<string> = className.split('.').filter(Boolean);
 
-        const parts : Array<string> = className.split('.').filter(Boolean);
+    parts.forEach((part) => {
+      part = getParam(part);
 
-        parts.forEach((part) => {
-            part = getParam(part);
+      if (part && shouldBePartOf.indexOf(part) === -1) {
+        shouldBePartOf.push(part);
+      }
+    });
 
-            if (part && shouldBePartOf.indexOf(part) === -1) {
-                shouldBePartOf.push(part);
-            }
-        });
+    return shouldBePartOf;
+  }
 
-        return shouldBePartOf;
-    }
+  private static getBlockParam(className: string): string {
+    const blockPattern: RegExp = /\S+?(?=__)/g;
 
-    private static getBlockParam(className : string) : string {
-        const blockPattern : RegExp = /\S+?(?=__)/g;
+    return className.match(blockPattern) && '.' + className.match(blockPattern)[0] + ' *';
+  }
 
-        return className.match(blockPattern) && '.' + className.match(blockPattern)[0] + ' *';
-    }
+  private static getModifierParam(className: string): string {
+    const modifierPattern: RegExp = /\S+?(?=--)/g;
 
-    private static getModifierParam(className : string) : string {
-        const modifierPattern : RegExp = /\S+?(?=--)/g;
+    return className.match(modifierPattern) && '.' + className.match(modifierPattern)[0];
+  }
 
-        return className.match(modifierPattern) && '.' + className.match(modifierPattern)[0];
-    }
+  private static isBemBlock(className: string): boolean {
+    const blockPattern: RegExp = /\w+__\w+/g;
 
-    private static isBemBlock(className : string) : boolean {
-        const blockPattern : RegExp = /\w+__\w+/g;
+    return className.match(blockPattern) ? true : false;
+  }
 
-        return className.match(blockPattern) ? true : false;
-    }
+  private static isBemModifier(className: string): boolean {
+    const modifierPattern: RegExp = /\w+--\w+/g;
 
-    private static isBemModifier(className : string) : boolean {
-        const modifierPattern : RegExp = /\w+--\w+/g;
-
-        return className.match(modifierPattern) ? true : false;
-    }
+    return className.match(modifierPattern) ? true : false;
+  }
 }
