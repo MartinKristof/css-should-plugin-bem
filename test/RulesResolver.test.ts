@@ -131,6 +131,18 @@ test('should resolve rules with bem declarations', (t) => {
       declarations: [{ foo: 'bar' }],
       position: { boo: 'bazz' },
     },
+    {
+      type: 'rule',
+      selectors: ['.search-form__slovnik-select-wrap szn-select[data-szn-select--single]'],
+      declarations: [{ foo: 'bar' }],
+      position: { boo: 'bazz' },
+    },
+    {
+      type: 'rule',
+      selectors: ['.hamburger-nav__list-item--separator'],
+      declarations: [{ foo: 'bar' }],
+      position: { boo: 'bazz' },
+    },
   ];
 
   const rulesResolver: RulesResolver = new RulesResolver(rules);
@@ -306,6 +318,22 @@ test('should resolve rules with bem declarations', (t) => {
       type: 'rule',
       selectors: ['*:hover .item--disabled+a.item--bold:active'],
       declarations: [{ foo: 'bar' }, { type: 'declaration', property: 'x-should', value: `match \'.item\'` }],
+      position: { boo: 'bazz' },
+    },
+    {
+      type: 'rule',
+      selectors: ['.search-form__slovnik-select-wrap szn-select[data-szn-select--single]'],
+      declarations: [{ foo: 'bar' }, { type: 'declaration', property: 'x-should', value: "match '.search-form *'" }],
+      position: { boo: 'bazz' },
+    },
+    {
+      type: 'rule',
+      selectors: ['.hamburger-nav__list-item--separator'],
+      declarations: [
+        { foo: 'bar' },
+        { type: 'declaration', property: 'x-should', value: "match '.hamburger-nav *'" },
+        { type: 'declaration', property: 'x-should', value: "match '.hamburger-nav__list-item'" },
+      ],
       position: { boo: 'bazz' },
     },
   ];

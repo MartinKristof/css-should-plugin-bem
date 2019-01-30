@@ -1,9 +1,14 @@
+# v2.0.0
+- Add processLint task to public API
+- Add lint for rules
+- Rename example commands
+
 # v1.3.0
 - Add Prettier
 - Build scripts with Webpack to use as third-party module
 - Add Changelog
 - Edit Readme
-
+- Fix linting class names
 
 # v1.2.2
 - fix `test` task

@@ -1,12 +1,13 @@
 import * as path from 'path';
 import * as chalk from 'chalk';
 import parseCss from './parseCss';
-import { lint } from '../../src/lint';
+import { lint, LintRuleType } from '../../src/lint';
 
 export default function(fileName: string) {
   console.log('Linting file ' + path.join(__dirname, fileName));
   const { css } = parseCss(fileName);
-  const missingClasses = lint(css);
+  const rules: Array<LintRuleType> = lint(css).rules;
+  const missingClasses = rules.map(({ missingClassName }) => missingClassName);
 
   if (missingClasses.length) {
     console.log(chalk['red']('There are some bad class names according to BEM detected!'));

@@ -1,30 +1,5 @@
 import test from 'ava-ts';
-import { preprocess, process, processLint, name } from '../src';
-
-let ctx = {
-  stylesheet: {
-    rules: [
-      {
-        type: 'media',
-        media: '(max-width: 480px)',
-        rules: [
-          {
-            type: 'rule',
-            selectors: ['.tabs'],
-            declarations: [{ foo: 'bar' }],
-            position: { boo: 'bazz' },
-          },
-        ],
-      },
-      {
-        type: 'rule',
-        selectors: ['.button.button--primary'],
-        declarations: [{ foo: 'bar' }],
-        position: { boo: 'bazz' },
-      },
-    ],
-  },
-};
+import { preprocess, processLint, name } from '../src';
 
 test('should get preproccess', (t) => {
   let ctx = {
@@ -48,6 +23,12 @@ test('should get preproccess', (t) => {
           declarations: [{ foo: 'bar' }],
           position: { boo: 'bazz' },
         },
+        {
+          type: 'rule',
+          selectors: ['.hamburger-nav__list-item--separator'],
+          declarations: [{ foo: 'bar' }],
+          position: { boo: 'bazz' },
+        },
       ],
     },
   };
@@ -55,38 +36,46 @@ test('should get preproccess', (t) => {
   t.deepEqual(preprocess(ctx, () => 'next'), 'next');
 });
 
-test('should get process', (t) => {
-  t.deepEqual(process(ctx), [
-    {
-      type: 'media',
-      media: '(max-width: 480px)',
+test('should get processLint', (t) => {
+  let ctx = {
+    stylesheet: {
       rules: [
         {
-          type: 'rule',
-          selectors: ['.tabs'],
-          declarations: [{ foo: 'bar' }],
-          position: { boo: 'bazz' },
+          type: 'media',
+          media: '(max-width: 480px)',
+          rules: [
+            {
+              type: 'rule',
+              selectors: ['.tabs'],
+              declarations: [{ foo: 'bar' }],
+              position: { source: 'source1', start: 'start1', end: 'end1' },
+            },
+          ],
         },
-      ],
-    },
-    {
-      type: 'rule',
-      selectors: ['.button.button--primary'],
-      declarations: [
-        { foo: 'bar' },
         {
-          property: 'x-should',
-          type: 'declaration',
-          value: "match '.button'",
+          type: 'rule',
+          selectors: ['.button.button--primary'],
+          declarations: [{ foo: 'bar' }],
+          position: { source: 'source1', start: 'start1', end: 'end1' },
+        },
+        {
+          type: 'rule',
+          selectors: ['.hamburger-nav__list-item--separator'],
+          declarations: [{ foo: 'bar' }],
+          position: { source: 'source1', start: 'start1', end: 'end1' },
         },
       ],
-      position: { boo: 'bazz' },
     },
-  ]);
-});
+  };
 
-test('should get processLint', (t) => {
-  t.deepEqual(processLint(ctx), ['.button']);
+  t.deepEqual(processLint(ctx), {
+    rules: [
+      { missingClassName: '.hamburger-nav', selector: '.hamburger-nav__list-item--separator' },
+      { missingClassName: '.hamburger-nav__list-item', selector: '.hamburger-nav__list-item--separator' },
+    ],
+    isValid: false,
+    isBemDetected: true,
+  });
 });
 
 test('should get name', (t) => {
