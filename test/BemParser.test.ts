@@ -5,74 +5,152 @@ const classProvider: Array<any> = [
   {
     description: '.button (modifier)',
     className: '.button.button--primary',
-    expectedSub: ['.button'],
+    expected: ['.button'],
   },
   {
     description: '.button (raw)',
     className: '.button',
-    expectedSub: [],
+    expected: [],
   },
   {
     description: '.button (block)',
     className: '.button .button__link',
-    expectedSub: ['.button *'],
+    expected: ['.button *'],
   },
   {
     description: '.tabs (both)',
     className: '.tabs__link--active',
-    expectedSub: ['.tabs *', '.tabs__link'],
+    expected: ['.tabs *', '.tabs__link'],
   },
   {
     description: '.tabs twice',
     className: '.tabs__link:hover',
-    expectedSub: ['.tabs *'],
+    expected: ['.tabs *'],
   },
   {
     description: 'nothing',
     className: '',
-    expectedSub: [],
+    expected: [],
   },
   {
     description: 'class on div',
     className: 'div.tabs__item',
-    expectedSub: ['.tabs *'],
+    expected: ['.tabs *'],
   },
   {
     description: 'class on anchor (modifier)',
     className: 'a.tabs__link--active',
-    expectedSub: ['.tabs *', '.tabs__link'],
+    expected: ['.tabs *', '.tabs__link'],
   },
   {
     description: 'class on anchor with pseudo class',
     className: '.tabs__link:checked',
-    expectedSub: ['.tabs *'],
+    expected: ['.tabs *'],
   },
   {
     description: 'list with modifier',
     className: 'ul.menu--primary',
-    expectedSub: ['.menu'],
+    expected: ['.menu'],
   },
   {
     description: 'modifier with entire element',
     className: 'i.item__icon.item__icon--spinning',
-    expectedSub: ['.item *', '.item__icon'],
+    expected: ['.item *', '.item__icon'],
   },
   {
     description: 'modifier without parent element',
     className: '.item--bold',
-    expectedSub: ['.item'],
+    expected: ['.item'],
   },
   {
     description: 'modifier on pseudo classes',
     className: 'a.item--bold:active',
-    expectedSub: ['.item'],
+    expected: ['.item'],
   },
 ];
 
-classProvider.forEach((provider) => {
-  test('should be part of ' + provider.description, (t) => {
-    const result: Array<string> = BemParser.parse(provider.className);
+classProvider.forEach(({ description, className, expected }) => {
+  test(`should be part of ${description}`, (t) => {
+    const result: Array<string> = BemParser.parse(className);
 
-    t.deepEqual(result, provider.expectedSub);
+    t.deepEqual(result, expected);
+  });
+});
+
+const classNameBlockProvider: Array<any> = [
+  {
+    description: '.button--primary',
+    className: '.button--primary',
+    expected: false,
+  },
+  {
+    description: '.button__new',
+    className: '.button__new',
+    expected: true,
+  },
+  {
+    description: 'with empty space inside',
+    className: '.button  __  new',
+    expected: false,
+  },
+  {
+    description: 'with empty space around',
+    className: '   .button__new   ',
+    expected: true,
+  },
+  {
+    description: '.button',
+    className: '.button',
+    expected: false,
+  },
+  {
+    description: '',
+    className: 'empty string',
+    expected: false,
+  },
+];
+
+classNameBlockProvider.forEach(({ description, className, expected }) => {
+  test(`should be isBemBlock of ${description}`, (t) => {
+    t.deepEqual(BemParser.isBemBlock(className), expected);
+  });
+});
+
+const classNameModifierProvider: Array<any> = [
+  {
+    description: '.button--primary',
+    className: '.button--primary',
+    expected: true,
+  },
+  {
+    description: '.button__new',
+    className: '.button__new',
+    expected: false,
+  },
+  {
+    description: 'with empty space inside',
+    className: '.button  --  primary',
+    expected: false,
+  },
+  {
+    description: 'with empty space around',
+    className: '   .button--primary   ',
+    expected: true,
+  },
+  {
+    description: '.button',
+    className: '.button',
+    expected: false,
+  },
+  {
+    description: '',
+    className: 'empty string',
+    expected: false,
+  },
+];
+
+classNameModifierProvider.forEach(({ description, className, expected }) => {
+  test(`should be isBemModifier of ${description}`, (t) => {
+    t.deepEqual(BemParser.isBemModifier(className), expected);
   });
 });

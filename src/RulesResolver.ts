@@ -1,6 +1,7 @@
 import BemParser from './BemParser';
 import { MediaQueryInterface } from './MediaQueryInterface';
 import { AtRule, Comment, Rule } from 'css';
+import { SelectorType } from './lint';
 
 export interface XshouldDeclarationInterface {
   type: string;
@@ -71,11 +72,11 @@ export default class RulesResolver {
   }
 
   private static isNotMediaQuery(rule: MediaQueryInterface | Rule): boolean {
-    return rule.type != 'media';
+    return rule.type !== 'media';
   }
 
   private static isRule(rule: MediaQueryInterface | Rule): boolean {
-    return rule.type == 'rule';
+    return rule.type === 'rule';
   }
 
   private getRuleWithBemDeclarations(rule: Rule): Rule {
@@ -94,7 +95,9 @@ export default class RulesResolver {
       return rule;
     }
 
-    const params: Array<string> = BemParser.parse(selectorsWithCssClass[0]);
+    let params: Array<string> = BemParser.parse(selectorsWithCssClass[0]);
+
+    params = RulesResolver.removeInvalidMatches(params);
 
     if (!params) {
       return rule;
@@ -111,13 +114,17 @@ export default class RulesResolver {
     return rule;
   }
 
-  private static isCssClass(selector: string): RegExpMatchArray {
+  private static isCssClass(selector: SelectorType): boolean {
     const pattern: RegExp = /(\.\S+)/g;
 
-    return selector.match(pattern);
+    return !!selector.match(pattern);
   }
 
-  private static getLastPartOfCssClass(selector: string): string {
+  private static removeInvalidMatches(matches: Array<string>): Array<string> {
+    return matches.filter((match) => !match.match(/\[.+/g));
+  }
+
+  private static getLastPartOfCssClass(selector: SelectorType): string {
     const parts: Array<string> = selector.split('.').filter(Boolean);
 
     return '.' + parts.pop();
