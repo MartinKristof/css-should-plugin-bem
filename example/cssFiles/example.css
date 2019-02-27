@@ -1,4 +1,16 @@
 @media (max-width: 480px) {
+  .tabs {
+    border: 1px solid #1b6494;
+  }
+
+  .tabs__link {
+    color: black;
+  }
+
+  .tabs__header {
+    display: block;
+  }
+
   .tabs__link--xxx,
   .tabs__link--active,
   .tabs__header--active,
@@ -9,14 +21,6 @@
   .tabs__item {
     color: blue;
   }
-}
-
-.tabs__link {
-  color: black;
-}
-
-.tabs {
-  border: 1px solid #1b6494;
 }
 
 .tabs__item--abc {

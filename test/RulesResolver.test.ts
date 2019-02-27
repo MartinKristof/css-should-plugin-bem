@@ -143,6 +143,12 @@ test('should resolve rules with bem declarations', (t) => {
       declarations: [{ foo: 'bar' }],
       position: { boo: 'bazz' },
     },
+    {
+      type: 'rule',
+      selectors: ['.hr--small.hr--spaced'],
+      declarations: [{ foo: 'bar' }],
+      position: { source: 'source1', start: 'start1', end: 'end1' },
+    },
   ];
 
   const rulesResolver: RulesResolver = new RulesResolver(rules);
@@ -335,6 +341,12 @@ test('should resolve rules with bem declarations', (t) => {
         { type: 'declaration', property: 'x-should', value: "match '.hamburger-nav__list-item'" },
       ],
       position: { boo: 'bazz' },
+    },
+    {
+      type: 'rule',
+      selectors: ['.hr--small.hr--spaced'],
+      declarations: [{ foo: 'bar' }, { type: 'declaration', property: 'x-should', value: "match '.hr'" }],
+      position: { source: 'source1', start: 'start1', end: 'end1' },
     },
   ];
 

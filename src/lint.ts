@@ -87,12 +87,23 @@ const detectMissingClasses = (
           if (matched.length <= 1) {
             invalidClassNames.push(className);
             invalidRules.push({ className, rule });
+
+            return;
           }
         }
 
         if (BemParser.isBemBlock(selector) && !BemParser.isBemModifier(className) && !BemParser.isBemBlock(className)) {
           invalidClassNames.push(className);
           invalidRules.push({ className, rule });
+
+          return;
+        }
+
+        if (BemParser.isBemModifier(selector)) {
+          invalidClassNames.push(className);
+          invalidRules.push({ className, rule });
+
+          return;
         }
       }
     });

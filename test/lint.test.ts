@@ -64,6 +64,12 @@ test('should get Invalid Rules if exist', (t) => {
           declarations: [{ foo: 'bar' }, { type: 'declaration', property: 'x-should', value: "match '.xyf *'" }],
           position: { source: 'source1', start: 'start1', end: 'end1' },
         },
+        {
+          type: 'rule',
+          selectors: ['.hr--small.hr--spaced'],
+          declarations: [{ foo: 'bar' }, { type: 'declaration', property: 'x-should', value: "match '.hr'" }],
+          position: { source: 'source1', start: 'start1', end: 'end1' },
+        },
       ],
     },
   };
@@ -85,6 +91,10 @@ test('should get Invalid Rules if exist', (t) => {
       {
         missingClassName: '.xyf',
         selector: '.xyf__footer__foo',
+      },
+      {
+        missingClassName: '.hr',
+        selector: '.hr--small.hr--spaced',
       },
     ],
     isValid: false,

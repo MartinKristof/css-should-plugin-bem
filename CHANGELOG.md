@@ -1,3 +1,7 @@
+# v2.0.1
+- Fix lint examples
+- Fix lint case with multiple modifier on a single selector  
+
 # v2.0.0
 - Add processLint task to public API
 - Add lint for rules

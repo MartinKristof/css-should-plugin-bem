@@ -64,6 +64,12 @@ test('should get processLint', (t) => {
           declarations: [{ foo: 'bar' }],
           position: { source: 'source1', start: 'start1', end: 'end1' },
         },
+        {
+          type: 'rule',
+          selectors: ['.hr--small.hr--spaced'],
+          declarations: [{ foo: 'bar' }],
+          position: { source: 'source1', start: 'start1', end: 'end1' },
+        },
       ],
     },
   };
@@ -72,6 +78,7 @@ test('should get processLint', (t) => {
     rules: [
       { missingClassName: '.hamburger-nav', selector: '.hamburger-nav__list-item--separator' },
       { missingClassName: '.hamburger-nav__list-item', selector: '.hamburger-nav__list-item--separator' },
+      { missingClassName: '.hr', selector: '.hr--small.hr--spaced' },
     ],
     isValid: false,
     isBemDetected: true,
