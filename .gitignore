@@ -9,3 +9,5 @@
 /.idea
 /.DS_Store
 yarn-error.log
+/.nyc_output
+/coverage

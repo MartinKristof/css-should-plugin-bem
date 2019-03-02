@@ -18,10 +18,13 @@ You can use both `yarn` or `npm run` to control application flow.
 * `compile` - Starts Next.js application
 * `build` - Build dist file with Webpack.
 * `build:lib` - Build lib files.
-* `test` - Runs AVA tests.
+* `ava` - Runs AVA tests.
+* `test` - Generates code coverage report.
 * `tsc` - Runs typescript compiler.
+* `lint` - - Run TSlint.
 * `prettier:check` - Check pretty of code.
 * `prettier:fix` - Runs prettyfying of code.
+* `ci` - Runs Continuous Integration cascade (`lint`, `test`, `prettier:check`).
 * `example:lint` - Lint example CSS file and show results in CLI.
 * `example:lint-with-error` - Lint example CSS file to demonstrate bad named classes according to BEM and show results in CLI.
 * `example:declarations` - Get BEM declarations for *CSS-should*, show them in CLI and save output into file.

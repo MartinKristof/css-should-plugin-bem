@@ -1,7 +1,7 @@
 import test from 'ava-ts';
 import BemParser from '../src/BemParser';
 
-const classProvider: Array<any> = [
+const classProvider: any[] = [
   {
     description: '.button (modifier)',
     className: '.button.button--primary',
@@ -69,15 +69,15 @@ const classProvider: Array<any> = [
   },
 ];
 
-classProvider.forEach(({ description, className, expected }) => {
+classProvider.forEach(({ description, className, expected }) =>
   test(`should be part of ${description}`, (t) => {
-    const result: Array<string> = BemParser.parse(className);
+    const result: string[] = BemParser.parse(className);
 
     t.deepEqual(result, expected);
-  });
-});
+  }),
+);
 
-const classNameBlockProvider: Array<any> = [
+const classNameBlockProvider: any[] = [
   {
     description: '.button--primary',
     className: '.button--primary',
@@ -110,13 +110,11 @@ const classNameBlockProvider: Array<any> = [
   },
 ];
 
-classNameBlockProvider.forEach(({ description, className, expected }) => {
-  test(`should be isBemBlock of ${description}`, (t) => {
-    t.deepEqual(BemParser.isBemBlock(className), expected);
-  });
-});
+classNameBlockProvider.forEach(({ description, className, expected }) =>
+  test(`should be isBemBlock of ${description}`, (t) => t.deepEqual(BemParser.isBemBlock(className), expected)),
+);
 
-const classNameModifierProvider: Array<any> = [
+const classNameModifierProvider: any[] = [
   {
     description: '.button--primary',
     className: '.button--primary',
@@ -149,8 +147,6 @@ const classNameModifierProvider: Array<any> = [
   },
 ];
 
-classNameModifierProvider.forEach(({ description, className, expected }) => {
-  test(`should be isBemModifier of ${description}`, (t) => {
-    t.deepEqual(BemParser.isBemModifier(className), expected);
-  });
-});
+classNameModifierProvider.forEach(({ description, className, expected }) =>
+  test(`should be isBemModifier of ${description}`, (t) => t.deepEqual(BemParser.isBemModifier(className), expected)),
+);

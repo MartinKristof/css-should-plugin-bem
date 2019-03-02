@@ -1,12 +1,12 @@
 import * as path from 'path';
 import * as chalk from 'chalk';
 import parseCss from './parseCss';
-import { lint, LintRuleType } from '../../src/lint';
+import { lint, ILintRule } from '../../src/lint';
 
 export default function(fileName: string) {
   console.log('Linting file ' + path.join(__dirname, fileName));
   const { css } = parseCss(fileName);
-  const rules: Array<LintRuleType> = lint(css).rules;
+  const rules: Array<ILintRule> = lint(css).rules;
   const missingClasses = rules.map(({ missingClassName }) => missingClassName);
 
   if (missingClasses.length) {

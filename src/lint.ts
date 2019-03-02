@@ -1,40 +1,43 @@
 import { Media, Rule, Stylesheet } from 'css';
-import { XshouldDeclarationInterface } from './RulesResolver';
 import BemParser from './BemParser';
+import { IXShouldDeclaration } from './RulesResolver';
 
 export type ClassNameType = string;
-type ClassNamesType = Array<ClassNameType>;
+type ClassNamesType = ClassNameType[];
 export type SelectorType = string;
-type SelectorsType = Array<SelectorType>;
-export type LintRuleType = { missingClassName: ClassNameType; selector: SelectorType };
+type SelectorsType = SelectorType[];
+export interface ILintRule {
+  missingClassName: ClassNameType;
+  selector: SelectorType;
+}
 
-export const lint = (css: Stylesheet): { rules: Array<LintRuleType>; isValid: boolean; isBemDetected: boolean } => {
+export const lint = (css: Stylesheet): { rules: ILintRule[]; isValid: boolean; isBemDetected: boolean } => {
   const { rules, isBemDetected } = getInvalidRules(css);
 
   return {
+    isBemDetected,
+    isValid: isBemDetected && rules.length === 0,
     rules: rules.map(({ rule, className }) => ({
       missingClassName: className,
       selector: rule.selectors[0] || '',
     })),
-    isValid: isBemDetected && rules.length === 0,
-    isBemDetected,
   };
 };
 
 const getInvalidRules = (
   css: Stylesheet,
 ): { rules: Array<{ className: ClassNameType; rule: Rule }>; isBemDetected: boolean } => {
-  let invalidRules = [];
-  let invalidClassNames = [];
-  let selectors = [];
-  let bemSelectors = [];
+  const invalidRules = [];
+  const invalidClassNames = [];
+  const selectors = [];
+  const bemSelectors = [];
 
   css.stylesheet.rules.forEach((rule: Rule & Media) => {
     detectMissingClasses(rule, invalidRules, invalidClassNames, selectors, bemSelectors);
 
     if (rule.type === 'media') {
-      rule.rules.forEach((rule: Rule) => {
-        detectMissingClasses(rule, invalidRules, invalidClassNames, selectors, bemSelectors);
+      rule.rules.forEach((item: Rule) => {
+        detectMissingClasses(item, invalidRules, invalidClassNames, selectors, bemSelectors);
       });
     }
   });
@@ -50,7 +53,7 @@ const isClassNameExistInCollection = (
 
 const detectMissingClasses = (
   rule: Rule,
-  invalidRules: Array<Object>,
+  invalidRules: object[],
   invalidClassNames: ClassNamesType,
   selectors: SelectorsType,
   bemSelectors: SelectorsType,
@@ -58,7 +61,7 @@ const detectMissingClasses = (
   if (rule.type === 'rule') {
     const selector = rule.selectors[0];
 
-    const allSelectors: Array<string> = [
+    const allSelectors: string[] = [
       ...new Set(
         []
           .concat(...selector.split('.'))
@@ -68,7 +71,7 @@ const detectMissingClasses = (
     ];
     selectors.push(...allSelectors);
 
-    rule.declarations.forEach((declaration: XshouldDeclarationInterface) => {
+    rule.declarations.forEach((declaration: IXShouldDeclaration) => {
       if (declaration.property === 'x-should') {
         bemSelectors.push(selector);
         const ruleDeclaration: RegExpMatchArray = declaration.value.match(/(?=\.)(.*)(?=')/g);

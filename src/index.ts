@@ -1,21 +1,17 @@
-import RulesResolver from './RulesResolver';
 import { Rule, Stylesheet } from 'css';
-import { MediaQueryInterface } from './MediaQueryInterface';
-import { lint, LintRuleType } from './lint';
+import { IMediaQuery } from './IMediaQuery';
+import { ILintRule, lint } from './lint';
+import RulesResolver from './RulesResolver';
 
-const process = (ctx: Stylesheet): Array<Rule | MediaQueryInterface> => {
-  return new RulesResolver(ctx.stylesheet.rules).resolve();
-};
+const process = (ctx: Stylesheet): Array<Rule | IMediaQuery> => new RulesResolver(ctx.stylesheet.rules).resolve();
 
-export const preprocess: Function = (ctx: Stylesheet, next: Function): Function => {
+export const preprocess = (ctx: Stylesheet, next: () => any): any => {
   ctx.stylesheet.rules = process(ctx);
 
   return next();
 };
 
-export const processLint = (
-  ctx: Stylesheet,
-): { rules: Array<LintRuleType>; isValid: boolean; isBemDetected: boolean } => {
+export const processLint = (ctx: Stylesheet): { rules: ILintRule[]; isValid: boolean; isBemDetected: boolean } => {
   ctx.stylesheet.rules = process(ctx);
 
   return lint(ctx);

@@ -1,3 +1,7 @@
+# v2.1.0
+- Add TSlint and fix files
+- Add UT code coverage nyc tool
+
 # v2.0.1
 - Fix lint examples
 - Fix lint case with multiple modifier on a single selector  

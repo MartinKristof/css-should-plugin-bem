@@ -1,37 +1,56 @@
-import BemParser from './BemParser';
-import { MediaQueryInterface } from './MediaQueryInterface';
 import { AtRule, Comment, Rule } from 'css';
+import BemParser from './BemParser';
+import { IMediaQuery } from './IMediaQuery';
 import { SelectorType } from './lint';
 
-export interface XshouldDeclarationInterface {
+export interface IXShouldDeclaration {
   type: string;
   property: string;
   value: string;
 }
 
 export default class RulesResolver {
+  private static isNotMediaQuery(rule: IMediaQuery | Rule): boolean {
+    return rule.type !== 'media';
+  }
+
+  private static isRule(rule: IMediaQuery | Rule): boolean {
+    return rule.type === 'rule';
+  }
+
+  private static isCssClass(selector: SelectorType): boolean {
+    const pattern: RegExp = /(\.\S+)/g;
+
+    return !!selector.match(pattern);
+  }
+
+  private static removeInvalidMatches(matches: string[]): string[] {
+    return matches.filter((match) => !match.match(/\[.+/g));
+  }
+
+  private static getLastPartOfCssClass(selector: SelectorType): string {
+    const parts: string[] = selector.split('.').filter(Boolean);
+
+    return '.' + parts.pop();
+  }
   constructor(private rules: Array<Rule | Comment | AtRule>) {}
 
-  public resolve(): Array<Rule | MediaQueryInterface> {
-    let result: Array<Rule | MediaQueryInterface> = [];
+  public resolve(): Array<Rule | IMediaQuery> {
+    const result: Array<Rule | IMediaQuery> = [];
 
     this.rules.forEach(
       (rule: any): void => {
         if (RulesResolver.isNotMediaQuery(rule) && RulesResolver.isRule(rule)) {
-          let rules = this.flattenRules([rule]);
+          const rules = this.flattenRules([rule]);
 
-          rules.map((rule) => {
-            result.push(this.getRuleWithBemDeclarations(rule));
-          });
+          rules.map((item: any) => result.push(this.getRuleWithBemDeclarations(item)));
 
           return;
         }
 
         rule.rules = this.flattenRules(rule.rules);
 
-        rule.rules = rule.rules.map((rule) => {
-          return this.getRuleWithBemDeclarations(rule);
-        });
+        rule.rules = rule.rules.map((item: any) => this.getRuleWithBemDeclarations(item));
 
         result.push(rule);
       },
@@ -40,8 +59,8 @@ export default class RulesResolver {
     return result;
   }
 
-  private flattenRules(rules: Array<Rule>): Array<Rule> {
-    let results: Array<Rule> = [];
+  private flattenRules(rules: Rule[]): Rule[] {
+    const results: Rule[] = [];
 
     if (!rules) {
       return results;
@@ -56,10 +75,10 @@ export default class RulesResolver {
         rule.selectors.forEach(
           (selector): void => {
             const newRule: Rule = {
-              type: rule.type,
-              selectors: [selector],
               declarations: rule.declarations,
               position: rule.position,
+              selectors: [selector],
+              type: rule.type,
             };
 
             results.push(newRule);
@@ -71,16 +90,8 @@ export default class RulesResolver {
     return results;
   }
 
-  private static isNotMediaQuery(rule: MediaQueryInterface | Rule): boolean {
-    return rule.type !== 'media';
-  }
-
-  private static isRule(rule: MediaQueryInterface | Rule): boolean {
-    return rule.type === 'rule';
-  }
-
   private getRuleWithBemDeclarations(rule: Rule): Rule {
-    const selectorsWithCssClass: Array<string> = [];
+    const selectorsWithCssClass: string[] = [];
 
     rule.selectors.forEach(
       (selector): void => {
@@ -95,7 +106,7 @@ export default class RulesResolver {
       return rule;
     }
 
-    let params: Array<string> = BemParser.parse(selectorsWithCssClass[0]);
+    let params: string[] = BemParser.parse(selectorsWithCssClass[0]);
 
     params = RulesResolver.removeInvalidMatches(params);
 
@@ -105,28 +116,10 @@ export default class RulesResolver {
 
     rule.declarations = rule.declarations.concat(
       params.map(
-        (param): XshouldDeclarationInterface => {
-          return { type: 'declaration', property: 'x-should', value: `match '${param}'` };
-        },
+        (param): IXShouldDeclaration => ({ type: 'declaration', property: 'x-should', value: `match '${param}'` }),
       ),
     );
 
     return rule;
-  }
-
-  private static isCssClass(selector: SelectorType): boolean {
-    const pattern: RegExp = /(\.\S+)/g;
-
-    return !!selector.match(pattern);
-  }
-
-  private static removeInvalidMatches(matches: Array<string>): Array<string> {
-    return matches.filter((match) => !match.match(/\[.+/g));
-  }
-
-  private static getLastPartOfCssClass(selector: SelectorType): string {
-    const parts: Array<string> = selector.split('.').filter(Boolean);
-
-    return '.' + parts.pop();
   }
 }

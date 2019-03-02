@@ -1,8 +1,9 @@
+/* tslint:disable:object-literal-sort-keys */
 import test from 'ava-ts';
 import { lint } from '../src/lint';
 
 test('should get Invalid Rules if exist', (t) => {
-  let ctx = {
+  const ctx = {
     stylesheet: {
       rules: [
         {
@@ -103,7 +104,7 @@ test('should get Invalid Rules if exist', (t) => {
 });
 
 test('should get Invalid Rules if not exist', (t) => {
-  let ctx = {
+  const ctx = {
     stylesheet: {
       rules: [
         {
@@ -151,7 +152,7 @@ test('should get Invalid Rules if not exist', (t) => {
 });
 
 test('should get is BEM not detected', (t) => {
-  let ctx = {
+  const ctx = {
     stylesheet: {
       rules: [
         {

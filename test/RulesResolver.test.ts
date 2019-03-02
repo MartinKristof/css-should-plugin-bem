@@ -1,10 +1,10 @@
 import test from 'ava-ts';
-import RulesResolver from '../src/RulesResolver';
-import { MediaQueryInterface } from '../src/MediaQueryInterface';
 import { Rule } from 'css';
+import { IMediaQuery } from '../src/IMediaQuery';
+import RulesResolver from '../src/RulesResolver';
 
 test('should resolve rules with bem declarations', (t) => {
-  const rules: Array<Rule | MediaQueryInterface> = [
+  const rules: Array<Rule | IMediaQuery> = [
     {
       type: 'media',
       media: '(max-width: 480px)',
@@ -153,7 +153,7 @@ test('should resolve rules with bem declarations', (t) => {
 
   const rulesResolver: RulesResolver = new RulesResolver(rules);
 
-  const expectedRules: Array<Rule | MediaQueryInterface> = [
+  const expectedRules: Array<Rule | IMediaQuery> = [
     {
       type: 'media',
       media: '(max-width: 480px)',

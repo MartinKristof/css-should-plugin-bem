@@ -1,8 +1,8 @@
 import test from 'ava-ts';
-import { preprocess, processLint, name } from '../src';
+import { name, preprocess, processLint } from '../src';
 
 test('should get preproccess', (t) => {
-  let ctx = {
+  const ctx = {
     stylesheet: {
       rules: [
         {
@@ -37,7 +37,7 @@ test('should get preproccess', (t) => {
 });
 
 test('should get processLint', (t) => {
-  let ctx = {
+  const ctx = {
     stylesheet: {
       rules: [
         {
@@ -75,16 +75,14 @@ test('should get processLint', (t) => {
   };
 
   t.deepEqual(processLint(ctx), {
+    isBemDetected: true,
+    isValid: false,
     rules: [
       { missingClassName: '.hamburger-nav', selector: '.hamburger-nav__list-item--separator' },
       { missingClassName: '.hamburger-nav__list-item', selector: '.hamburger-nav__list-item--separator' },
       { missingClassName: '.hr', selector: '.hr--small.hr--spaced' },
     ],
-    isValid: false,
-    isBemDetected: true,
   });
 });
 
-test('should get name', (t) => {
-  t.is(name, 'BEM');
-});
+test('should get name', (t) => t.is(name, 'BEM'));
