@@ -1,3 +1,7 @@
+# v2.1.1
+- Fix TS files according TSLint
+- Rename private method to *detectInvalidRules*
+
 # v2.1.0
 - Add TSlint and fix files
 - Add UT code coverage nyc tool

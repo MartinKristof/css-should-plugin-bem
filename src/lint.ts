@@ -33,11 +33,11 @@ const getInvalidRules = (
   const bemSelectors = [];
 
   css.stylesheet.rules.forEach((rule: Rule & Media) => {
-    detectMissingClasses(rule, invalidRules, invalidClassNames, selectors, bemSelectors);
+    detectInvalidRules(rule, invalidRules, invalidClassNames, selectors, bemSelectors);
 
     if (rule.type === 'media') {
       rule.rules.forEach((item: Rule) => {
-        detectMissingClasses(item, invalidRules, invalidClassNames, selectors, bemSelectors);
+        detectInvalidRules(item, invalidRules, invalidClassNames, selectors, bemSelectors);
       });
     }
   });
@@ -51,13 +51,13 @@ const isClassNameExistInCollection = (
   className: ClassNameType,
 ): boolean => selectors.includes(className);
 
-const detectMissingClasses = (
+const detectInvalidRules = (
   rule: Rule,
   invalidRules: object[],
   invalidClassNames: ClassNamesType,
   selectors: SelectorsType,
   bemSelectors: SelectorsType,
-) => {
+): void => {
   if (rule.type === 'rule') {
     const selector = rule.selectors[0];
 
